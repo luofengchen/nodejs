@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<title>Document</title>
+	</head>
+
+	<body>
+		<!--<form action="body" method="post">
+		<input name="q" value="123" /><br /><br />
+		<input name="w" value="123" /><br /><br />
+		<input type="submit" value="提交"/>
+	</form>-->
+		<button class="btn btn-success">提交</button>
+		<script type="text/javascript">
+			$(".btn").click(function() {
+				$.ajax({
+					type: "get",
+					url: "/query?q=123&w=456",
+					success: function(d) {
+						console.log(d);
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

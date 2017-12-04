@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+
+		<title>登录落枫后台管理</title>
+	</head>
+
+	<body>
+		<h1 onselectstart="return false" onclick="location.href='/'">落枫后台管理系统</h1>
+		<h1>登录</h1>
+		<%- include('style.ejs')%>
+		<button class="btn btn-danger">登录</button>
+		<script type="text/javascript">
+			$(".btn").click(function() {
+				$.ajax({
+					type: "post",
+					url: "/users/logo",
+					data: {
+						'username': $("#txt").val(),
+						"password": $("#psd").val()
+					},
+//  			dataType:'jsonp',
+					success: function(d) {
+						if (d == 1) {
+							alert("登录成功");
+							location.href = '/';
+						}else if(d == 0){
+							alert("登录失败,密码或账号错误");
+							location.href = '/logo';
+						}else{
+							alert("登录出错,请联系毛姐!");
+						}
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

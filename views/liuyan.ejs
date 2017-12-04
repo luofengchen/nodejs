@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edevice-widthdge" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/javascripts/xheditor/xheditor-1.2.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/javascripts/xheditor/xheditor_lang/zh-cn.js" type="text/javascript" charset="utf-8"></script>
+		<title>留言板</title>
+		<style type="text/css">
+			/*span{
+				padding: 10px;
+				padding-right: 0;
+				float: left;
+			}*/
+			
+			.lab {
+				width: 80px;
+				height: 40px;
+				background: slateblue;
+				/*padding-bottom: 0;*/
+				line-height: 40px;
+				text-align: center;
+			}
+			
+			#txt {
+				float: left;
+				width: 200px;
+				height: 40px;
+				margin-left: 30px;
+				/*display: block;*/
+			}
+			
+			.lab1 {
+				float: left;
+			}
+			
+			.lesson {
+				overflow: hidden;
+				margin-left: 20px;
+			}
+			
+			.lesson3 {
+				margin-bottom: 26px;
+				float: left;
+			}
+			
+			.btn3 {
+				width: 90px;
+				height: 34px;
+				float: left;
+				margin-left: 30px;
+				margin-bottom: 26px;
+			}
+			
+			.btn4 {
+				width: 90px;
+				height: 34px;
+				float: left;
+				margin-left: 30px;
+				margin-bottom: 26px;
+			}
+			
+			.btn3>input,
+			.btn4>input {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.lesson>span {
+				line-height: 40px;
+				margin-left: 30px;
+				color: red;
+			}
+			
+			.lesson2 {
+				display: block;
+				overflow: hidden;
+				margin-top: 20px;
+			}
+			
+			.lab2 {
+				float: left;
+			}
+			
+			.submit {
+				float: left;
+			}
+			
+			.con {
+				width: 80%;
+				height: 80%;
+				display: block;
+				float: left;
+				overflow: hidden;
+			}
+			/*设置富文本的宽度和高度*/
+			
+			.box1 {
+				/*width: 800px;*/
+				width: 1000px;
+				height: 300px;
+				margin-left: 30px;
+				float: left;
+			}
+			
+			.titleb {
+				margin-left: 20px;
+				/*margin-bottom: 30px;*/
+				/*width: 200px;*/
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+				color: #67B168;
+			}
+			
+			.title {
+				margin-left: 20px;
+				margin-bottom: 30px;
+				width: 200px;
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+				color: #67B168;
+			}
+			
+			.submit {
+				margin-left: 110px;
+			}
+			
+			.table {
+				overflow: hidden;
+				margin-left: 130px;
+				margin-top: 50px;
+				border: 0;
+				width: 1000px;
+				/*height: 40px;*/
+			}
+			
+			.table tbody {
+				border: 0;
+			}
+			
+			.table tr {
+				width: 1000px;
+				height: 50px;
+				display: block;
+				overflow: hidden;
+			}
+			
+			.table>tbody>tr>th {
+				width: 250px;
+				height: 50px;
+				padding: 0;
+				line-height: 0;
+				padding-left: 96px;
+				line-height: 50px;
+				text-align: left;
+			}
+			
+			.table>tbody>tr .dele {
+				float: right;
+			}
+			
+			.table>tbody>tr .word a {
+				width: 40px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.table>tbody>tr .word a>div {
+				width: 40px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			/*.table tbody tr .titlecon {
+				width: 40px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}*/
+			
+			.table>tbody>tr .word>a {
+				font-style: 16px;
+				color: #999;
+				text-decoration: none;
+			}
+			
+			.table>tbody>tr .word>a:hover {
+				color: skyblue;
+				text-decoration: underline;
+			}
+			
+			.table>tbody>tr .btnth {
+				/*float: right;*/
+				line-height: 0;
+				padding-left: 0;
+				width: 54px;
+				height: 34px;
+			}
+			
+			.table>tbody>tr .btnth .btn {
+				/*margin-left: 20px;*/
+				margin-top: 10px;
+			}
+			
+			.table>tbody>tr .btnth1 .btn {
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			
+			.table>tbody>tr .btnth2 .btn {
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+			
+			.table .first th {
+				width: 250px;
+				height: 50px;
+				border-top: 0;
+				padding-left: 90px;
+				line-height: 50px;
+				text-align: left;
+			}
+			/*.table>tbody>tr th .imgid img{
+				width: 100px;
+				height: 100px;
+			}*/
+			
+			.pagination {
+				margin-left: 420px;
+			}
+			
+			.pagination .lastli {
+				margin-left: 20px;
+				line-height: 34px;
+			}
+			
+			.pagination li>a {
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body onselectstart="return false;">
+		<%- include('home.ejs')%>
+		<h2 class="title">留言板</h2>
+		<div>
+			<div class="lesson"><label class="lab1 lab" for="txt">评论标题:</label><input type="text" id="txt" class="form-control" /><span>(填写要保存的评论标题)</span></div>
+			<div class="lesson lesson2"><label class="lab2 lab" for="content">评论内容:</label>
+				<div class="box1"><textarea id="content" class="con xheditor"></textarea></div>
+			</div>
+			<div class="lesson lesson3"><button class="btn btn-info submit">提交评论</button></div>
+			<div class="btn3"><input type="button" class="detail btn btn-success" value="详情" /></div>
+			<div class="btn4"><input type="button" class="search btn btn-danger" value="查询" /></div>
+
+		</div>
+		<table class="table">
+			<tr class="first">
+				<th>序号</th>
+				<th>标题</th>
+				<th>内容</th>
+			</tr>
+			<% if(result){%>
+			<%result.forEach((value,i)=>{%>
+			<tr>
+				<th>
+					<%-(i+1)%>
+				</th>
+				<th>
+					<div class="titlecon">
+						<%- value['title']%>
+					</div>
+				</th>
+				<th class="word">
+					<a class="imgid" title="<%- value['content']%>" data-id="<%-value['_id']%>" href="javascript:;">
+						<!--javascript:;-->
+						<%- value['content']%>
+					</a>
+				</th>
+				<th class="btnth btnth1"><input type="button" class="reset btn btn-warning" data-id="<%-value['_id']%>" value="修改" /></th>
+				<th class="btnth btnth2"><input type="button" class="dele btn btn-danger" data-id="<%-value['_id']%>" value="删除" /></th>
+			</tr>
+			<%})%>
+			<%}%>
+		</table>
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<li>
+					<a href="/liuyan?fyid=1">首页</a>
+				</li>
+				<li>
+					<a href="/liuyan?fyid=<%- fyid<=1?1:parseInt(fyid)-1 %>" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<% for(let i=0;i<zys;i++){ %>
+				<li>
+					<a href="/liuyan?fyid=<%- i+1 %>">
+						<%- i+1 %>
+					</a>
+				</li>
+				<% } %>
+				<li>
+					<a href="/liuyan?fyid=<%- fyid>=zys?zys:parseInt(fyid)+1 %>" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				<li>
+					<a href="/liuyan?fyid=<%-zys %>">尾页</a>
+				</li>
+				<li class="lastli">一共
+					<%-counts %> 条数据</li>
+			</ul>
+		</nav>
+
+	</body>
+	<script src="/javascripts/fwb.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		//写入数据
+		$(function() {
+			$(document).keyup((e)=>{
+				if (e.keyCode == 13) {
+					submits()
+				}
+			})
+			$(".submit").click(() => {
+				//			console.log($("#content"),)
+				submits()
+			})
+			function submits () {
+				$.ajax({
+					type: "post",
+					url: "/users/setliuyan",
+					data: {
+						"title": $("#txt").val(),
+						"content": $("#content").val()
+					},
+					success: function(d) {
+						if(d == 1) {
+							alert("写入记录成功!")
+							location.href = '/liuyan'
+						}
+					}
+				})
+			}
+			// 删除数据内容
+			$(".dele").click((e) => {
+				console.log($(e.target).attr('data-id'))
+				$.ajax({
+					type: "post",
+					url: "/users/deladata",
+					data: {
+						_id: $(e.target).attr('data-id')
+					}
+				}).done(function(d) {
+					if(d == 1) {
+						alert("删除数据成功。");
+						location.href = '/detail';
+					} else if(d == 0) {
+						alert("删除失败，请联系客服")
+					}
+				})
+			})
+			//点击简略的内容 跳转详情页  imgid
+			$('.detail').click((e) => {
+				//			console.log($(e.target).attr("data-id"))
+				//			var id = $(e.target).attr("data-id");
+				$.ajax({
+					type: "get",
+					url: "/tzym2"
+				}).done(function(d) {
+					if(d == 1) {
+						console.log(d);
+						location.href = '/detail'
+					} else if(d == 0) {
+						console.log(d)
+						alert("当前数据库没有留言,请填写留言")
+					} else {
+						alert("获取信息失败.请联系客服!")
+					}
+				})
+			})
+
+			//search 搜素 获取数据库中的相同数据 
+			$(".search").click(() => {
+				location.href = '/detail/search';
+			})
+
+			// 修改按钮点击后跳转修改页面
+			$(".reset").click((e) => {
+				console.log($(e.target).attr('data-id'))
+				var id = $(e.target).attr("data-id");
+				$.ajax({
+					type: "get",
+					url: "/tzym1?id=" + id
+				}).done(function(d) {
+					if(d) {
+						console.log(d);
+						location.href = '/detail/change'
+						//成功获取 点击修改按钮后 返回的数据库内的内容
+					}
+				})
+			})
+		})
+	</script>
+
+</html>

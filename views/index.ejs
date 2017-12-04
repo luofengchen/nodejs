@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css"/>
+    <script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+    	.btn{
+    		margin-top: 60px;
+    	}
+    	.btn:nth-of-type(1){
+    		margin-left: 70px;
+    	}
+    	.btn:nth-of-type(2){
+    		margin-left: 60px;
+    	}
+    	div{
+    		float: left;
+    	}
+    	div:nth-of-type(1){
+    		margin-top: 20px;
+    	}
+    	div:nth-of-type(2){
+    		margin-top: 30px;
+    	}
+    	input{
+    		/*float: left;*/
+    		padding-left: 12px;
+    		margin-left: 20px;
+    	}
+    	input:nth-of-type(1){
+    		margin-top: 20px;
+    	}
+    	input:nth-of-type(2){
+    		margin-top: 30px;
+    	}
+    </style>
+  </head>
+  <body>
+  	<%- include('home.ejs')%>
+    <!--<% console.log(title) %>-->
+    <% if(title){ %>
+    	<h2>欢迎用户:<%- title %>登录落枫后台管理系统</h2>
+    	<button class="btn btn-info" onclick="location.href='/relogo'">注销账号</button>
+    	<button class="btn btn-primary" onclick="location.href='/liuyan'">留言板</button>
+    <% } else{%>
+    <h2>注册登录</h2>
+    <button class="btn btn-danger" onclick="location.href='/logo'">登录</button>
+    <button class="btn btn-success" onclick="location.href='/joinin'">注册</button>
+    <% }%>
+  </body>
+</html>

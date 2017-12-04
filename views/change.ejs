@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css"/>
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		
+		<title>落枫后台信息修改</title>
+		<style type="text/css">
+			.titleb {
+				margin-left: 30px;
+				margin-bottom: 30px;
+				min-width: 200px;
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+			}
+			
+			.title {
+				margin-left: 30px;
+				margin-bottom: 30px;
+				width: 200px;
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+				color: #67B168;
+			}
+			
+			.atabl {
+				overflow: hidden;
+				width: 400px;
+				height: 500px;
+				margin-left: 30px;
+			}
+			
+			.atabl>div {
+				overflow: hidden;
+				font-size: 18px;
+				color: #666;
+			}
+			
+			.atabl>div:nth-of-type(2) {
+				margin-top: 20px;
+			}
+			
+			.atabl>div>div {
+				float: left;
+				width: 100px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+			}
+			
+			.atabl>div>input {
+				padding: 5px 0;
+				padding-left: 20px;
+				float: left;
+				font-size: 18px;
+				color: #666;
+			}
+			
+			.atabl .btnth1 .btn {
+				/*margin-top: 10px;*/
+				margin-left: 10px;
+			}
+			
+			.atabl .btnth2 .btn {
+				/*margin-top: 10px;*/
+				margin-left: 30px;
+			}
+			.ann{
+				overflow: hidden;
+				margin-left: 90px;
+				margin-top: 20px;
+			}
+			.ann .btnth{
+				float: left;
+				width: 110px;
+				height: 50px;
+			}
+			.ann .btnth .btn{
+				width: 90%;
+				height: 90%;
+				padding: 6px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<%- include('home.ejs')%>
+		<h3 class="title">信息修改</h3>
+		<%if(data){%>
+		<%#if(data["type"] == 1){%>
+		<div class="atabl">
+			<div>
+				<div>title:</div><input type="text" id="tit" value="<%-data.title%>" /></div>
+			<div>
+				<div>content:</div><input type="text" id="cont" value="<%-data.content%>" /></div>
+			<div class="ann">
+			<div class="btnth btnth1"><input type="button" class="submit btn btn-info" data-id="<%-data['_id']%>" value="提交修改内容" /></div>
+			<div class="btnth btnth2"><input type="button" class="cancel btn btn-danger" data-id="<%-data['_id']%>" value="取消" /></div>
+			</div>
+		</div>
+		<%#}%>
+		<%}%>
+		<script type="text/javascript">
+			$(function  () {
+				$(".submit").click((e)=>{
+					console.log(e.target);
+					$.ajax({
+						type:"post",
+						url:"/users/update",
+						data:{id:$(e.target).attr("data-id"),title:$("#tit").val(),content:$("#cont").val()}
+					}).done((d)=>{
+						console.log(d);
+						if (d == 1) {
+							alert("更新数据成功!");
+							location.href = '/liuyan';
+						}else if (d == 0) {
+							alert("更新数据失败,请联系客服!");
+							location.href = '/liuyan';
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+		<title>search</title>
+		<style type="text/css">
+			.titleb {
+				margin: 0 auto;
+				max-width: 300px;
+				height: 40px;
+				margin-top: 30px;
+			}
+			
+			.title {
+				margin: 0 auto;
+				margin-bottom: 30px;
+				width: 200px;
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+				color: #67B168;
+				margin-top: 30px;
+			}
+			
+			.atab {
+				overflow: hidden;
+				margin: 0 auto;
+				width: 400px;
+				height: 60px;
+				position: relative;
+			}
+			
+			.atab input[type=text] {
+				width: 360px;
+				height: 40px;
+				padding-left: 20px;
+			}
+			
+			.atab #btn {
+				width: 100px;
+				height: 40px;
+				/*float: left;*/
+				/*padding-left:20px;*/
+			}
+			
+			.cont {
+				overflow: hidden;
+				min-width: 600px;
+				min-height: 40px;
+				margin-top: 20px;
+			}
+			
+			.cont .title1 {
+				overflow: hidden;
+				margin-left: 300px;
+				width: 600px;
+			}
+			
+			.cont .title1>div {
+				float: left;
+				overflow: hidden;
+				min-width: 200px;
+				height: 40px;
+				line-height: 40px;
+				background: #D1DEEF;
+				text-align: center;
+			}
+			
+			.cont .pro {
+				overflow: hidden;
+				margin-left: 300px;
+				min-width: 600px;
+			}
+			
+			.cont .pro .box>div {
+				float: left;
+				overflow: hidden;
+				min-width: 200px;
+				height: 40px;
+				line-height: 40px;
+				/*background: #D1DEEF;*/
+				border-bottom: 1px solid #DEDEDE;
+				border-left: 1px solid #DEDEDE;
+				text-align: center;
+			}
+			
+			.cont .pro .box>div:last-of-type {
+				border-right: 1px solid #DEDEDE;
+			}
+			
+			.search {
+				position: absolute;
+				right: 40px;
+				outline: none;
+				text-decoration: none;
+				/*background: #fff;*/
+			}
+			
+			.alldel {
+				position: absolute;
+				/*right: -100px;*/
+				overflow: hidden;
+				display: block;
+				left: 300px;
+			}
+			
+			.cont .pro .box>div img {
+				display: block;
+			}
+			
+			.box {
+				overflow: hidden;
+				/*background: cyan;*/
+				float: left;
+			}
+			
+			.btnth {
+				float: left;
+				margin-top: 2px;
+				margin-left: 10px;
+			}
+			/*.btnth1{
+				margin-left: 10px;
+			}
+			.btnth2{
+				margin-left: 10px;
+			}*/
+		</style>
+	</head>
+
+	<body onselectstart="return false">
+		<%- include('home.ejs')%>
+		<h3 class="title">search</h3>
+		<div class="atab">
+			<input type="text" id="txt" placeholder="请输入要搜索title" />
+			<input type="button" class="btn-link search" id="btn" value="搜索" />
+		</div>
+		<!--<input type="button" class="btn btn-danger alldel" value="删除选择" />-->
+		<div class="cont">
+			<div class="title1">
+				<div>number</div>
+				<div>title</div>
+				<div>content</div>
+			</div>
+			<div class="pro">
+			</div>
+		</div>
+		<script type="text/javascript">
+			$("#txt").focusin((e) => {
+				if($(e.target).attr("placeholder")) {
+					$(e.target).attr("placeholder", "")
+				}
+			})
+			$("#txt").focusout((e) => {
+				if(!$(e.target).val()) {
+					$(e.target).attr("placeholder", "请输入要搜索title")
+				}
+			})
+			$(document).keyup((e) => {
+				console.log(e.keyCode);
+				if(e.keyCode == 13) {
+					
+					zhunbeitube($("#btn")[0])
+				}
+			})
+			$("#btn").click((e) => {
+				zhunbeitube(e)
+			})
+
+			function zhunbeitube(that) {
+				if($(that).siblings("#txt").val() == '') {
+					alert("请输入搜索内容!");
+				} else {
+					var title = $(that).siblings("#txt").val();
+					$.ajax({
+						type: "get",
+						url: "/search?title=" + title
+					}).done((d) => {
+						var s = '';
+						console.log(d)
+						for(var i = 0; i < d.length; i++) {
+							//						console.log(d+1)s
+							s += "<div class='box'><div><input type='checkbox' data-id='" + d[i]['_id'] + "' class='check'/>" + (i + 1) + "</div><div>" + d[i]['title'] + "</div><div>" + d[i]['content'] + "</div></div><div class='btnth btnth1'><input type='button' class='reset btn btn-warning' data-id='" + d[i]['_id'] + "' value='修改' /></div><div class='btnth btnth2'><input type='button' class='dele btn btn-danger' data-id='" + d[i]['_id'] + "' value='删除' /></div>";
+						}
+						$(".pro").html(s);
+						$(".check").click((e) => {
+							console.log($(that).prop("checked"))
+							if($(that).prop("checked") == true) {
+								$(that).parent().parent().css("background", "cyan");
+							} else {
+								$(that).parent().parent().css("background", "#fff");
+							}
+						})
+						// 删除数据内容
+						$(".dele").click((e) => {
+							console.log($(e.target).attr('data-id'))
+							$.ajax({
+								type: "post",
+								url: "/users/deladata",
+								data: {
+									_id: $(e.target).attr('data-id')
+								}
+							}).done(function(d) {
+								if(d == 1) {
+									alert("删除数据成功。");
+									location.href = '/detail';
+								} else if(d == 0) {
+									alert("删除失败，请联系客服")
+								}
+							})
+						})
+						$(".reset").click((e) => {
+							console.log($(e.target).attr('data-id'))
+							var id = $(e.target).attr("data-id");
+							$.ajax({
+								type: "get",
+								url: "/tzym1?id=" + id
+							}).done(function(d) {
+								if(d == 1) {
+									console.log(d);
+									location.href = '/detail/change'
+									//成功获取 点击修改按钮后 返回的数据库内的内容
+								}
+							})
+						})
+					})
+				}
+			}
+
+			//			$(".alldel").click(()=>{
+			//				
+			//			})
+		</script>
+	</body>
+
+</html>

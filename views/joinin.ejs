@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css"/>
+	<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<title>注册落枫后台管理</title>
+</head>
+<body>
+	<div>
+		<h1 onselectstart="return false" onclick="location.href='/'">落枫后台管理系统</h1>
+		<h1>注册</h1>
+		<%- include('style.ejs')%>
+		<button class="btn btn-success">注册</button>
+	</div>
+	<script type="text/javascript">
+		$(".btn").click(function  () {
+    		$.ajax({
+    			type:"post",
+    			url:"/users/join",
+    			data:{'username':$("#txt").val(),"password":$("#psd").val()},
+//  			dataType:'jsonp',
+    			success:function  (d) {
+    				if (d == 1) {
+    					alert("注册成功,即将跳转登录页面......");
+    					location.href = '/logo';
+    				}else if (d == 0){
+    					alert("注册失败:账号重复,请重试!");
+    					location.href = '/joinin';
+    				}else {
+    					alert("数据库,连接失败,请联系客服!");
+    					console.log(d)
+    				}
+    			}
+    		});
+    	})
+	</script>
+</body>
+</html>

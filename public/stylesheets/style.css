@@ -1,0 +1,41 @@
+body {
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #00B7FF;
+}
+h1{
+	cursor:pointer;
+}
+div {
+	float: left;
+	margin-right: 20px;
+}
+
+div:nth-of-type(1) {
+	margin-top: 20px;
+}
+
+div:nth-of-type(2) {
+	margin-top: 30px;
+}
+
+input {
+	/*float: left;*/
+	padding-left: 12px;
+	margin-left: 20px;
+}
+
+input:nth-of-type(1) {
+	margin-top: 20px;
+}
+
+input:nth-of-type(2) {
+	margin-top: 30px;
+}
+.btn{
+	margin-top: 10px;
+	margin-left: 75px;
+}

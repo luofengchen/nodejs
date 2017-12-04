@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+		<script src="/javascripts/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.title {
+				margin: 0 auto;
+				margin-bottom: 30px;
+				width: 200px;
+				height: 40px;
+				font-size: 36px;
+				line-height: 40px;
+				color: #67B168;
+				margin-top: 30px;
+			}
+			.titleb{
+				margin: 0 auto;
+				max-width: 300px;
+				height: 40px;
+			}
+			.atable {
+				width: 502px;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			
+			.pict {
+				width: 200px;
+				height: 200px;
+				float: left;
+			}
+			.detail {
+				/*float: left;*/
+				overflow: hidden;
+				
+				width: 502px;
+				min-height: 40px;
+				/*height: 300px;*/
+				/*border: 1px solid #000;*/
+			}
+			/*.detail>div*/
+			/*.detail>div{
+				overflow: hidden;
+			}*/
+			
+			.detail>span {
+				float: left;
+				display: block;
+				width: 250px;
+				min-height: 40px;
+				text-align: center;
+				line-height: 40px;
+			}
+			/*.detail>span:nth-of-type(2n+1){
+			}*/
+			.title1{
+				width: 502px;
+				height: 30px;
+			}
+			.title1 div{
+				width: 250px;
+				height: 30px;
+				line-height: 30px;
+				float: left;
+				border: 1px solid #dedede;
+				border-right: 0;
+				text-align: center;
+				line-height: 30px;
+			}
+			.title1 div:nth-of-type(2){
+				border-right: 1px solid #dedede;
+			}
+		</style>
+		<title>落枫后台详情</title>
+	</head>
+	<body onselectstart="return false">
+		<%- include('home.ejs')%>
+		<h3 class="title">详细信息</h3>
+		<h3 class="title back" onclick="location.href = '/liuyan'">跳转回留言</h3>
+		<%if(data){%>
+		<div class="atable fl">
+			<div class="title1"><div>title</div><div>content</div></div>
+			<%data.forEach((value,i)=>{%>
+			<!--<div class="pict"></div>-->
+			<div class="detail fr">
+					<span class="tit"><%- value["title"]%></span>
+					<span class="cont"><%- value["content"]%></span>
+			</div>
+		<%})%>
+		<%}%>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				console.log($(".cont"));
+				console.log($(".cont").outerHeight());
+				console.log($(".cont").siblings("div").height())
+				$(".tit").height($(".tit").siblings("div").height())
+				$(".cont").height($(".cont").siblings("div").height())
+			})
+		</script>
+	</body>
+
+</html>
